@@ -8,7 +8,7 @@ namespace HackerNews.Provider.Models
         string Descendants { get; set; }
         string Id { get; set; }
         IEnumerable<string> Kids { get; set; }
-        string Score { get; set; }
+        int Score { get; set; }
         string Time { get; set; }
         string Title { get; set; }
         string Type { get; set; }
