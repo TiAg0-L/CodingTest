@@ -2,7 +2,7 @@
 
 namespace HackerNews.Provider.Models
 {
-    public sealed class Item
+    public sealed class Item : IItem
     {
         public string Title { get; set; }
         public string Url { get; set; }
