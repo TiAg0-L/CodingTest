@@ -11,7 +11,7 @@ namespace HackerNews.Provider
     /// <summary>
     /// Represents the Hacker News API.
     /// </summary>
-    public sealed class HackerNewsAPI
+    public sealed class HackerNewsAPI : IHackerNewsAPI
     {
         private readonly IHackerNewsApiConfigurations _configuration;
 
