@@ -15,6 +15,10 @@ namespace CodingTest.Domain.Stories
     {
         private readonly IHackerNewsAPI _api;
 
+        /// <summary>
+        /// Creates ab instace of <see cref="Stories"/>.
+        /// </summary>
+        /// <param name="api">The API to fetch data from.</param>
         public Stories(IHackerNewsAPI api)
         {
             _api = api ?? throw new ArgumentNullException(nameof(api));
