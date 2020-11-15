@@ -1,0 +1,26 @@
+﻿using CodingTest.Models.Responses;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using DomainItems = CodingTest.Domain.Items;
+
+namespace CodingTest.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class StoriesController : ControllerBase
+    {
+        private readonly DomainItems.IStories _stories;
+
+        public StoriesController(DomainItems.IStories stories)
+        {
+            _stories = stories ?? throw new ArgumentNullException(nameof(stories));
+        }
+
+        public IEnumerable<StoryResponse> Get()
+        {
+            return _stories.Get20BestStories().Select(story => new StoryResponse(story));
+        }
+    }
+}
