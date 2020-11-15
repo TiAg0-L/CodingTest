@@ -18,6 +18,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodingTest.Domain", "Coding
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingTest.DomainTests", "CodingTest.DomainTests\CodingTest.DomainTests.csproj", "{6F612E34-52CB-405D-833A-915BA23383EA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingTestTests", "CodingTestTests\CodingTestTests.csproj", "{08F12267-12BD-42C1-A1CD-5B08C17EB756}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{6F612E34-52CB-405D-833A-915BA23383EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F612E34-52CB-405D-833A-915BA23383EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F612E34-52CB-405D-833A-915BA23383EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08F12267-12BD-42C1-A1CD-5B08C17EB756}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08F12267-12BD-42C1-A1CD-5B08C17EB756}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08F12267-12BD-42C1-A1CD-5B08C17EB756}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08F12267-12BD-42C1-A1CD-5B08C17EB756}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
