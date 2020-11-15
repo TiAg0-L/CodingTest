@@ -14,7 +14,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackerNews.Provider", "Hack
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackerNews.ProviderTests", "HackerNews.ProviderTests\HackerNews.ProviderTests.csproj", "{E9C92773-CA07-406D-855D-685F4BF24721}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingTest.Domain", "CodingTest.Domain\CodingTest.Domain.csproj", "{CEF0BBA9-13A0-4711-9E3B-6FA796FD1741}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodingTest.Domain", "CodingTest.Domain\CodingTest.Domain.csproj", "{CEF0BBA9-13A0-4711-9E3B-6FA796FD1741}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingTest.DomainTests", "CodingTest.DomainTests\CodingTest.DomainTests.csproj", "{6F612E34-52CB-405D-833A-915BA23383EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +40,10 @@ Global
 		{CEF0BBA9-13A0-4711-9E3B-6FA796FD1741}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEF0BBA9-13A0-4711-9E3B-6FA796FD1741}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEF0BBA9-13A0-4711-9E3B-6FA796FD1741}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F612E34-52CB-405D-833A-915BA23383EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F612E34-52CB-405D-833A-915BA23383EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F612E34-52CB-405D-833A-915BA23383EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F612E34-52CB-405D-833A-915BA23383EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

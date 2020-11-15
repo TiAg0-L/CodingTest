@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CodingTest.Domain.Items
+namespace CodingTest.Domain.Stories
 {
     /// <summary>
     /// Represents an item collection.

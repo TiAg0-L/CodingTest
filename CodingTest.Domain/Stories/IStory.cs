@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CodingTest.Domain.Items
+namespace CodingTest.Domain.Stories
 {
     /// <summary>
     /// Represents a story.

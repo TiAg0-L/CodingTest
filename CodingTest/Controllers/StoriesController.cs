@@ -1,9 +1,9 @@
-﻿using CodingTest.Models.Responses;
+﻿using CodingTest.Domain.Stories;
+using CodingTest.Models.Responses;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DomainItems = CodingTest.Domain.Items;
 
 namespace CodingTest.Controllers
 {
@@ -11,9 +11,9 @@ namespace CodingTest.Controllers
     [ApiController]
     public class StoriesController : ControllerBase
     {
-        private readonly DomainItems.IStories _stories;
+        private readonly IStories _stories;
 
-        public StoriesController(DomainItems.IStories stories)
+        public StoriesController(IStories stories)
         {
             _stories = stories ?? throw new ArgumentNullException(nameof(stories));
         }

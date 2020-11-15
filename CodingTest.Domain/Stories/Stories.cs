@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ProviderModels = HackerNews.Provider.Models;
 
-namespace CodingTest.Domain.Items
+namespace CodingTest.Domain.Stories
 {
     /// <summary>
     /// Represents an item collection.

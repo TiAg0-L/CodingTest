@@ -1,4 +1,4 @@
-﻿using CodingTest.Domain.Items;
+﻿using CodingTest.Domain.Stories;
 using HackerNews.Provider;
 using HackerNews.Provider.Configurations;
 using Microsoft.AspNetCore.Builder;
