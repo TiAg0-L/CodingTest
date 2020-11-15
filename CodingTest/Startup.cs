@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using CodingTest.Domain.Items;
+using HackerNews.Provider;
+using HackerNews.Provider.Configurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 
 namespace CodingTest
 {
@@ -25,7 +22,19 @@ namespace CodingTest
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                });
+
+            var hackerNewsApiConfigurations = new HackerNewsApiConfigurations();
+            Configuration.Bind("HackerNewsApiConfigurations", hackerNewsApiConfigurations);
+            services.AddSingleton<IHackerNewsApiConfigurations>(hackerNewsApiConfigurations);
+
+            services.AddSingleton<IStories, Stories>();
+            services.AddSingleton<IHackerNewsAPI, HackerNewsAPI>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
