@@ -1,6 +1,7 @@
 ﻿using CodingTest.Domain.Stories;
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 
 namespace CodingTest.DomainTests.Stories
 {
@@ -16,7 +17,7 @@ namespace CodingTest.DomainTests.Stories
                 postedBy: null,
                 time: null,
                 score: 0,
-                commentCount: 0
+                kids: new List<string>()
             ).Time;
 
             Assert.IsNull(result);
@@ -31,7 +32,7 @@ namespace CodingTest.DomainTests.Stories
                 postedBy: null,
                 time: null,
                 score: 0,
-                commentCount: 0
+                kids: new List<string>()
             ).Time;
 
             Assert.IsNull(result);
@@ -46,7 +47,7 @@ namespace CodingTest.DomainTests.Stories
                 postedBy: null,
                 time: null,
                 score: 0,
-                commentCount: 0
+                kids: new List<string>()
             ).Time;
 
             Assert.IsNull(result);
@@ -55,7 +56,7 @@ namespace CodingTest.DomainTests.Stories
         [Test]
         public void TimeTest_GivenSecondsFromUnixEpochToNow_ReturnsCorrectValue()
         {
-            var expectedDateTime = new DateTime(2020,1,1,1,1,1,DateTimeKind.Utc);
+            var expectedDateTime = new DateTime(2020, 1, 1, 1, 1, 1, DateTimeKind.Utc);
             var totalSeconds = (expectedDateTime - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc))
                 .TotalSeconds;
 
@@ -65,7 +66,7 @@ namespace CodingTest.DomainTests.Stories
                 postedBy: null,
                 time: totalSeconds.ToString(),
                 score: 0,
-                commentCount: 0
+                kids: new List<string>()
             ).Time;
 
             Assert.AreEqual(expectedDateTime, result);

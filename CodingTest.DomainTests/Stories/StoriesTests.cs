@@ -1,6 +1,8 @@
 ﻿using CodingTest.Domain.Stories;
 using HackerNews.Provider;
 using HackerNews.Provider.Models;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -8,17 +10,40 @@ using System.Collections.Generic;
 using System.Linq;
 using DomainStories = CodingTest.Domain.Stories;
 
+
 namespace CodingTest.DomainTests.Stories
 {
     [TestFixture]
     public class StoriesTests
     {
+        private IServiceProvider _serviceProvider;
+
+        [OneTimeSetUp]
+        public void Setup()
+        {
+            var services = new ServiceCollection();
+            services.AddMemoryCache();
+            _serviceProvider = services.BuildServiceProvider();
+        }
+
         [Test]
         public void StoriesTest_GivenNullAPI_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                new DomainStories.Stories(api: null)
-            );
+                new DomainStories.Stories(
+                api: null,
+                cache: null
+            ));
+        }
+
+        [Test]
+        public void StoriesTest_GivenNullCache_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() =>
+                new DomainStories.Stories(
+                api: new Mock<IHackerNewsAPI>().Object,
+                cache: null
+            ));
         }
 
         [Test]
@@ -42,13 +67,16 @@ namespace CodingTest.DomainTests.Stories
                 postedBy: item.By,
                 time: item.Time,
                 score: item.Score,
-                commentCount: item.Kids.Count()
+                kids: item.Kids
             );
             var apiMock = new Mock<IHackerNewsAPI>();
             apiMock.Setup((m) => m.GetBeststories()).Returns(new string[] { item.Id });
             apiMock.Setup((m) => m.GetItem(item.Id)).Returns(item);
 
-            var result = new DomainStories.Stories(api: apiMock.Object).Get20BestStories();
+            var result = new DomainStories.Stories(
+                api: apiMock.Object,
+                cache: _serviceProvider.GetService<IMemoryCache>()
+            ).Get20BestStories();
             var firstResult = result.First();
 
             Assert.AreEqual(1, result.Count());
@@ -87,7 +115,10 @@ namespace CodingTest.DomainTests.Stories
             }
             apiMock.Setup((m) => m.GetBeststories()).Returns(items.Select(item => item.Id));
 
-            var result = new DomainStories.Stories(api: apiMock.Object).Get20BestStories();
+            var result = new DomainStories.Stories(
+                api: apiMock.Object,
+                cache: _serviceProvider.GetService<IMemoryCache>()
+            ).Get20BestStories();
 
             Assert.AreEqual(20, result.Count());
             Assert.That(result, Has.No.Member(items.Where(item => item.Score == 0)));

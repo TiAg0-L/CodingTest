@@ -29,7 +29,7 @@ namespace CodingTestTests.Controllers
                 postedBy: "An author",
                 time: "1",
                 score: 2,
-                commentCount: 3
+                kids: new List<string> { "3","4"}
             );
             var storiesMock = new Mock<IStories>();
             storiesMock.Setup(m => m.Get20BestStories())
