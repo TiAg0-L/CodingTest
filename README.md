@@ -14,4 +14,4 @@
 1. Document the API, perhaps using OpenApi specification / swagger
 1. Proper error handling to provide consumer with proper http error status / messages
 1. Implement a [IHostedService](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/hosted-services?view=aspnetcore-2.2&tabs=visual-studio) to reduce the time of the first call due to cache creation.
- * Or use a proper database with a job(?) to fetch this data.
+  * Or use a proper database with a job(?) to fetch this data.
