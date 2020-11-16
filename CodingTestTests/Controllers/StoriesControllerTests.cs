@@ -29,13 +29,12 @@ namespace CodingTestTests.Controllers
                 postedBy: "An author",
                 time: "1",
                 score: 2,
-                kids: new List<string> { "3","4"}
+                kids: new List<string> { "3", "4" }
             );
             var storiesMock = new Mock<IStories>();
             storiesMock.Setup(m => m.Get20BestStories())
                 .Returns(new List<IStory> { story });
             var expectedStory = new StoryResponse(story);
-
 
             var result = new StoriesController(stories: storiesMock.Object)
                 .Get();
@@ -48,6 +47,19 @@ namespace CodingTestTests.Controllers
             Assert.AreEqual(expectedStory.Time, firstResult.Time);
             Assert.AreEqual(expectedStory.Title, firstResult.Title);
             Assert.AreEqual(expectedStory.Uri, firstResult.Uri);
+        }
+
+        [Test]
+        public void GetTest_Existing0Story_ReturnsEquivalentResponseModel()
+        {
+            var storiesMock = new Mock<IStories>();
+            storiesMock.Setup(m => m.Get20BestStories())
+                .Returns(new List<IStory> { });
+
+            var result = new StoriesController(stories: storiesMock.Object)
+                .Get();
+
+            Assert.AreEqual(0, result.Count());
         }
     }
 }
