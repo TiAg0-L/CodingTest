@@ -1,4 +1,5 @@
-﻿using CodingTest.Domain.Stories;
+﻿using CodingTest.Domain.Configurations;
+using CodingTest.Domain.Stories;
 using HackerNews.Provider;
 using HackerNews.Provider.Configurations;
 using Microsoft.AspNetCore.Builder;
@@ -34,7 +35,11 @@ namespace CodingTest
             var hackerNewsApiConfigurations = new HackerNewsApiConfigurations();
             Configuration.Bind("HackerNewsApiConfigurations", hackerNewsApiConfigurations);
             services.AddSingleton<IHackerNewsApiConfigurations>(hackerNewsApiConfigurations);
-
+            
+            var storiesConfigurations = new StoriesConfigurations();
+            Configuration.Bind("StoriesConfigurations", storiesConfigurations);
+            services.AddSingleton<IStoriesConfigurations>(storiesConfigurations);
+            
             services.AddSingleton<IStories, Stories>();
             services.AddSingleton<IHackerNewsAPI, HackerNewsAPI>();
         }

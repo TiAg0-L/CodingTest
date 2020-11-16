@@ -1,4 +1,5 @@
-﻿using CodingTest.Domain.Stories;
+﻿using CodingTest.Domain.Configurations;
+using CodingTest.Domain.Stories;
 using HackerNews.Provider;
 using HackerNews.Provider.Models;
 using Microsoft.Extensions.Caching.Memory;
@@ -29,20 +30,42 @@ namespace CodingTest.DomainTests.Stories
         [Test]
         public void StoriesTest_GivenNullAPI_ThrowsArgumentNullException()
         {
+            var storiesConfigurations = new Mock<IStoriesConfigurations>();
+            storiesConfigurations.Setup(m => m.StoryTimeToLiveInSeconds).Returns(5);
+
             Assert.Throws<ArgumentNullException>(() =>
                 new DomainStories.Stories(
                 api: null,
-                cache: null
+                cache: _serviceProvider.GetService<IMemoryCache>(),
+                storiesConfigurations: storiesConfigurations.Object
             ));
         }
 
         [Test]
         public void StoriesTest_GivenNullCache_ThrowsArgumentNullException()
         {
+            var storiesConfigurations = new Mock<IStoriesConfigurations>();
+            storiesConfigurations.Setup(m => m.StoryTimeToLiveInSeconds).Returns(5);
+
             Assert.Throws<ArgumentNullException>(() =>
                 new DomainStories.Stories(
                 api: new Mock<IHackerNewsAPI>().Object,
-                cache: null
+                cache: null,
+                storiesConfigurations: storiesConfigurations.Object
+            ));
+        }
+
+        [Test]
+        public void StoriesTest_GivenNullStoriesConfigurations_ThrowsArgumentNullException()
+        {
+            var storiesConfigurations = new Mock<IStoriesConfigurations>();
+            storiesConfigurations.Setup(m => m.StoryTimeToLiveInSeconds).Returns(5);
+
+            Assert.Throws<ArgumentNullException>(() =>
+                new DomainStories.Stories(
+                api: new Mock<IHackerNewsAPI>().Object,
+                cache: _serviceProvider.GetService<IMemoryCache>(),
+                storiesConfigurations: null
             ));
         }
 
@@ -72,10 +95,13 @@ namespace CodingTest.DomainTests.Stories
             var apiMock = new Mock<IHackerNewsAPI>();
             apiMock.Setup((m) => m.GetBeststories()).Returns(new string[] { item.Id });
             apiMock.Setup((m) => m.GetItem(item.Id)).Returns(item);
+            var storiesConfigurations = new Mock<IStoriesConfigurations>();
+            storiesConfigurations.Setup(m => m.StoryTimeToLiveInSeconds).Returns(5);
 
             var result = new DomainStories.Stories(
                 api: apiMock.Object,
-                cache: _serviceProvider.GetService<IMemoryCache>()
+                cache: _serviceProvider.GetService<IMemoryCache>(),
+                storiesConfigurations: storiesConfigurations.Object
             ).Get20BestStories();
             var firstResult = result.First();
 
@@ -114,10 +140,13 @@ namespace CodingTest.DomainTests.Stories
 
             }
             apiMock.Setup((m) => m.GetBeststories()).Returns(items.Select(item => item.Id));
+            var storiesConfigurations = new Mock<IStoriesConfigurations>();
+            storiesConfigurations.Setup(m => m.StoryTimeToLiveInSeconds).Returns(5);
 
             var result = new DomainStories.Stories(
                 api: apiMock.Object,
-                cache: _serviceProvider.GetService<IMemoryCache>()
+                cache: _serviceProvider.GetService<IMemoryCache>(),
+                storiesConfigurations: storiesConfigurations.Object
             ).Get20BestStories();
 
             Assert.AreEqual(20, result.Count());

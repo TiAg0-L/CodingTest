@@ -1,4 +1,5 @@
-﻿using HackerNews.Provider;
+﻿using CodingTest.Domain.Configurations;
+using HackerNews.Provider;
 using HackerNews.Provider.Models;
 using Microsoft.Extensions.Caching.Memory;
 using System;
@@ -14,15 +15,16 @@ namespace CodingTest.Domain.Stories
     {
         private readonly IHackerNewsAPI _api;
         private readonly IMemoryCache _cache;
-
+        private readonly IStoriesConfigurations _storiesConfigurations;
         /// <summary>
         /// Creates ab instace of <see cref="Stories"/>.
         /// </summary>
         /// <param name="api">The API to fetch data from.</param>
-        public Stories(IHackerNewsAPI api, IMemoryCache cache)
+        public Stories(IHackerNewsAPI api, IMemoryCache cache, IStoriesConfigurations storiesConfigurations)
         {
             _api = api ?? throw new ArgumentNullException(nameof(api));
             _cache = cache ?? throw new ArgumentNullException(nameof(cache));
+            _storiesConfigurations = storiesConfigurations ?? throw new ArgumentNullException(nameof(storiesConfigurations));
         }
 
         /// <summary>
@@ -31,10 +33,14 @@ namespace CodingTest.Domain.Stories
         /// <returns></returns>
         public IEnumerable<IStory> Get20BestStories()
         {
-            return _api.GetBeststories().Select(storyId => 
+            return _api.GetBeststories().Select(storyId =>
                 _cache.GetOrCreate(
                   storyId,
-                  entry => new Story(_api.GetItem(storyId))
+                  entry =>
+                  {
+                      entry.SetSlidingExpiration(TimeSpan.FromSeconds(_storiesConfigurations.StoryTimeToLiveInSeconds));
+                      return new Story(_api.GetItem(storyId));
+                  }
                 )
             ).OrderByDescending(item => item.Score)
             .Take(20);
