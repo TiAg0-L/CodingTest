@@ -4,7 +4,7 @@
 1. Use command `dotnet restore`
 1. Use command `dotnet build`
 1. Use command `dotnet run -p .\CodingTest\CodingTest.csproj`
-1. Do a GET /api/Stories on the URL the application is listening to.
+1. Do a `GET /api/Stories` on the URL the application is listening to.
 
 
 ## My assumptions 
